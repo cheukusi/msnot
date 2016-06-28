@@ -1,8 +1,10 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Author    : allqoow
 # Contact   : allqoow@gmail.com
-# Started on: 20160501(yyyymmdd)
+# Started on: 20160624(yyyymmdd)
+# Project	: msnot
 
 # importing required modules
 import codecs, csv, re, sys
@@ -15,57 +17,83 @@ from selenium.webdriver.common.keys import Keys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+
+"""
+b = ''
+with open(".\\sample001.txt", "r+") as aa:
+	readlined = aa.readline()
+	readlined = True
+	while readlined:
+		readlined = aa.readline()
+		b += readlined
+
+b = str(b)
+b = b.decode('utf8')
+b = re.sub("\n","",b)
+b = b +"★"
+b += "\n"
+print b
+
+driver = webdriver.Firefox()
+driver.get("http://203.250.77.84")
+
+inputBox = driver.find_element_by_id("TextBox1")
+inputBox.send_keys(b)
+outputBox = driver.find_element_by_id("TextBox2").text
+print outputBox
+
+driver.close()
+
+cc = outputBox.split("\n")
+for x in cc:
+	print x
+
+print cc[50]
+"""
+
+aa = "asdg"
+if re.search(r"\d+",aa, re.UNICODE):
+	print "Match!"
+else:
+	print "Not match"
+	
+
+
+
+
+
+"""
+dd = aa.read()
+bb = aa.readline()
+#print aa.tell()
+aa.seek(3)
+cc = aa.readline()
+#aa.write("aaaaaaaa")
+aa.seek(3)
+kk = aa.readlines()
+print kk 
+aa.close()
+print "\n"
+
+pp = open(".\\sample001.txt", "w")
+pp.write("I wrote something")
+pp.seek(0)
+
+qq = open(".\\sample001.txt", "a")
+"""
+
+"""
 # setting file directories
 direc = ".\\textData\\"
-driver = webdriver.Firefox()
-fileName = "ttt2.csv"
 
-driver.get("http://www.nrf.re.kr/")
-
-# defining some functions
-def write_unicode(text, charset='utf-8'):
-    return text.encode(charset)
-
-baseURL = "http://www.nrf.re.kr/nrf_tot_cms/board/biz_notice/view.jsp?show_no=170&check_no=169&c_relation=biz&c_relation2=0&c_no=99&c_now_tab=1&BBS_LLF_CD=biznot&BBS_SLF_CD=99&NTS_NO="
-
-# the Range of indices to crawl
-theRange = range(78994,79005)
+openFileName = "readerFriendly.txt"
+saveFileName = "readerFriendly2.txt"
 
 ret = ""
-for index in theRange:
-	indexedURL = baseURL + str(index)
-	driver.get(indexedURL)
-	
-	content = driver.find_element_by_class_name("bd_view_txt").text
-
-	#converting the datatype from unicode to string
-	content = str(content)
-	content = re.sub(r" +"," ",content)
-	content = content.replace("\n","[[ENTER]]")
-	
-	#htmlContent = write_unicode(driver.page_source)
-	wrContents = driver.find_elements_by_class_name("left")
-	dept = wrContents[1].text
-	if dept:
-		date = wrContents[3].text
-
-		ret += dept
-		ret += "|"
-		ret += date
-		ret += "|"
-		ret += content
-		ret += "\n"
-
-		ret = write_unicode(ret)
-
-		saveFile = open(direc + fileName, "a")
-		saveFile.write(codecs.BOM_UTF8)
-		saveFile.write(ret)
-		# close the file
-		saveFile.close()
-		print "done with " + str(index)
-	else:
-		pass
-
-# close the browser so that your desktop would look nice.
-driver.close()
+with open(direc + openFileName, "r+") as c: 
+	readlined = c.read()
+	ret = readlined.replace("====================","====================\n")
+	ret = readlined.replace("[[ENTER]]","\n")
+with open(direc + saveFileName, "w") as c:
+	c.write(ret)
+"""
