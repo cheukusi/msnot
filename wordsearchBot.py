@@ -23,15 +23,12 @@ fileName = "ttt2.csv"
 
 searchWord = "국토해양부"
 searchWord = unicode(searchWord, errors='replace')
-targetURL = "http://terms.naver.com/search.nhn?query=" + searchWord + "&searchType=&dicType=&subject="
-#driver.get("http://terms.naver.com/list.nhn?cid=50867&categoryId=50867")
-driver.get(targetURL)
-# In case where I first tried, they were "mb_id" and "mb_pw". 
-#element_id = driver.find_element_by_id("term_query") 
 
+# searching from terms.naver.com
+targetURL = "http://terms.naver.com/search.nhn?query=" + searchWord + "&searchType=&dicType=&subject="
+driver.get(targetURL)
 
 searchResults = driver.find_elements_by_tag_name("a")
-
 cddList = []
 for x in searchResults:
 	if re.search(searchWord, x.text, re.UNICODE):
