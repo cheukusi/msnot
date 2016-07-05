@@ -23,8 +23,8 @@ sys.setdefaultencoding('utf-8')
 # setting file directories
 direc = ".\\textData\\"
 driver = webdriver.Firefox()
-saveFileNameEn = "sampleEn.csv"
-saveFileNameKo = "sampleKo.csv"
+#saveFileNameEn = "sampleEn.csv"
+#saveFileNameKo = "sampleKo.csv"
 
 driver.get("http://www.nrf.re.kr/")
 
@@ -36,6 +36,8 @@ baseURL = "http://www.nrf.re.kr/nrf_tot_cms/board/biz_notice/view.jsp?show_no=17
 # the Range of indices to crawl
 si = int(raw_input("Enter Starting index: "))
 ei = int(raw_input("Enter Ending index: "))
+saveFileNameEn = raw_input('Enter the output file name (Korean Sample): ')
+saveFileNameKo = raw_input('Enter the output file name (English Sample): ')
 theRange = range(si,ei)
 
 retKo = ""

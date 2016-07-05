@@ -6,51 +6,40 @@
 # Started on: 20160624(yyyymmdd)
 # Project	: msnot
 
-# importing required modules
-import codecs, csv, re, sys
+# in order not to import the same modules redundantly
+def atTermsNaver(searchWord, driver, re):
+	targetURL = "http://terms.naver.com/search.nhn?query=" + searchWord + "&searchType=&dicType=&subject="
+	driver.get(targetURL)
+	searchResults = driver.find_elements_by_tag_name("a")
 
-# especially, the module, selenium
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+	cddList = []
+	for x in searchResults:
+		targetText = str(x.text)
+		if re.search(searchWord+r' +', targetText, re.UNICODE):
+			cdd = ""
+			for c in x.text:
+				if ord(c) in range(32,127):
+					cdd += c
+			if re.search(r'[a-zA-Z]',cdd):
+				#print cdd
+				cdd = str(cdd)
+				cdd = re.sub(r'\[\W*',r'',cdd)
+				cdd = re.sub(r'\W*\]',r'',cdd)
+				cdd = cdd.strip()
+				cddList.append(cdd)
+	"""
+	for x in range(len(cddList)):
+		print re.match(r'[a-zA-Z]',cddList[x])
+	"""
+	# do coherency test, then...
+	if len(cddList) == 0:
+		cddList.append('No official translation')
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
+	return cddList[0]
 
-# setting file directories
-direc = ".\\textData\\"
-driver = webdriver.Firefox()
-fileName = "ttt2.csv"
+	# or send query to other scripts?
+	#if len(cddList) == 0:
+	#	print "EMPTY"
 
-searchWord = "국토해양부"
-searchWord = unicode(searchWord, errors='replace')
-
-# searching from terms.naver.com
-targetURL = "http://terms.naver.com/search.nhn?query=" + searchWord + "&searchType=&dicType=&subject="
-driver.get(targetURL)
-
-searchResults = driver.find_elements_by_tag_name("a")
-cddList = []
-for x in searchResults:
-	if re.search(searchWord, x.text, re.UNICODE):
-		cdd = ""
-		for c in x.text:
-			if ord(c) in range(32,127):
-				cdd += c
-		cdd = str(cdd)
-		cdd = re.sub(r'\[\W*',r'',cdd)
-		cdd = re.sub(r'\W*\]',r'',cdd)
-		print cdd
-
-		cddList.append(cdd)
-indexAdjust = 0
-for x in range(len(cddList)):
-	print re.match(r'[a-zA-Z]',cddList[x])
-
-print cddList
-#print driver.current_url
-#for x in cddList:
-	#x = 
-
-driver.close()
-
-
+# driver.get("https://translate.google.co.kr/")
+# searching from http://elaw.klri.re.kr/kor_service/main.do
