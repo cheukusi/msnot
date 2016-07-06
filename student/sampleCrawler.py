@@ -13,15 +13,12 @@ import codecs, csv, re, sys
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-# importing custom modules
-# import sanitiser(?)
-
 # resetting the chararcter setting for unicode issue
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
 # setting file directories
-direc = ".\\textData\\"
+direc = "..\\textData\\"
 driver = webdriver.Firefox()
 #saveFileNameEn = "sampleEn.csv"
 #saveFileNameKo = "sampleKo.csv"

@@ -5,7 +5,9 @@
 # Contact   : allqoow@gmail.com
 # Started on: 20160624(yyyymmdd)
 # Project	: msnot
-
+#
+# Step 3
+#
 # in order not to import the same modules redundantly
 def atTermsNaver(searchWord, driver, re):
 	targetURL = "http://terms.naver.com/search.nhn?query=" + searchWord + "&searchType=&dicType=&subject="

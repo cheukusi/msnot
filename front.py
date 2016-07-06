@@ -6,7 +6,17 @@
 # Started on: 20160624(yyyymmdd)
 # Project   : msnot
 
-import sys
+# importing required modules
+import codecs, csv, re, sys
+
+# especially, the module, selenium
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+
+# resetting the chararcter setting for unicode issue
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 #userInput = sys.argv[1]
 
 # 1. sanitiser

@@ -17,7 +17,7 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 # setting file directories
-direc = ".\\textData\\"
+direc = "..\\textData\\"
 sfnSampleKoToEn = "sampleKoToEn.csv"
 sfnDictKoToEn = "dictKoToEn.csv"
 
