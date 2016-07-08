@@ -29,10 +29,7 @@ def atTermsNaver(searchWord, driver, re):
 				cdd = re.sub(r'\W*\]',r'',cdd)
 				cdd = cdd.strip()
 				cddList.append(cdd)
-	"""
-	for x in range(len(cddList)):
-		print re.match(r'[a-zA-Z]',cddList[x])
-	"""
+
 	# do coherency test, then...
 	if len(cddList) == 0:
 		cddList.append('No official translation')

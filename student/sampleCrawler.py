@@ -12,7 +12,7 @@ import codecs, csv, re, sys
 # especially, the module, selenium
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-
+from importlib import reload
 # resetting the chararcter setting for unicode issue
 reload(sys)
 sys.setdefaultencoding('utf-8')
