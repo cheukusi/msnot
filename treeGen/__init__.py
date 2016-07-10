@@ -9,7 +9,7 @@
 class treeGen():
 	def __init__(self, rawSen, taggedSen):
 		self.case = 0
-		self.rawSen = rawSen
+		#self.rawSen = rawSen
 		self.taggedSen = taggedSen
 
 		self.treekeyList = [len(taggedSen)]
@@ -35,10 +35,16 @@ class treeGen():
 			args.append(self.tagSeq[i:])
 		self.ngramSeq = zip(*args)
 
-	#def determineCase(self, taggedSen):
+	def determineCase(self):
+		# case 0
+		# No superordinate level component is found prior to the subordinate clauses.
+		if 'JX' not in self.tagSeq:
+			self.case = 0
+		else:
+			self.case = 1
+
 	def treekeyListGen(self):
 		# Case 0
-		# No superordinate level component is found prior to the subordinate clauses.
 		if self.case == 0:
 			verblikes = ['XSV', 'XSA', 'VV', 'VA', 'VX', 'VCP', 'VCN']
 			endinglikes = ['EP', 'EF', 'EC', 'ETN', 'ETM']
@@ -78,6 +84,7 @@ class treeGen():
 		caseSpecificTagSet = ['JX']
 
 		# Case 0
+		# 주어가 없다
 		# No superordinate level component is found prior to the subordinate clauses.
 		if self.case == 0:
 			adjust = 0
@@ -110,6 +117,9 @@ class treeGen():
 					else:
 						mainPointer -= 1
 		
+		# Case 1
+		# 주어가 있다
+
 		print self.schemeList
 		print '\n'
 			

@@ -6,27 +6,30 @@
 # Started on: 20160624(yyyymmdd)
 # Project	: msnot
 
-import time
+# 구글번역기로 대체할 부분
+# 4-2. rearranging & substituting to English words
+# 4-3. reconstructing a sentence from a tree
 
 class senBuilder():
 
 	# reuse open driver
-	def __init__(self, driver, ejlisedSen, schemeList):
+	def __init__(self, driver, ejlisedSen, schemeList, partialTransListExt):
 		self.driver = driver 
 		self.ejlisedSen = ejlisedSen
 		self.schemeList = schemeList
+		self.partialTransListExt = partialTransListExt 
 		
 		self.partialTransList = []
 		self.schemeIndex = 0
 		self.schemeAdjust = 0
 		self.translatedOrder = 0
 		self.cache0 = ''
+		self.finalOutput = ''
 
 		self.driver.get('https://translate.google.co.kr/?hl=ko#ko/en/')		
 		while self.schemeIndex < len(self.schemeList):
 			self.enterToSource()
 		self.deAlias()
-		driver.close()
 
 	def enterToSource(self):
 		scheme = self.schemeList[self.schemeIndex]
@@ -47,9 +50,9 @@ class senBuilder():
 			inputPhrase += str(x[0])
 			inputPhrase += ' '
 		print inputPhrase
-		inputPhrase = unicode(inputPhrase.strip())		
-		elementSource = self.driver.find_element_by_id('source')
+		inputPhrase = unicode(inputPhrase.strip())
 		self.driver.get('https://translate.google.co.kr/?hl=ko#ko/en/')
+		elementSource = self.driver.find_element_by_id('source')
 		elementSource.send_keys('')
 		elementSource.send_keys(inputPhrase)
 
@@ -77,6 +80,8 @@ class senBuilder():
 		# Case 1
 		if phrasePos == 'MAG':
 			alias = 'Then'
+			#alias = 'Dann'
+			#alias = 'entonces,'
 		else:
 			alias = 'CompleteSentence'
 
@@ -111,3 +116,5 @@ class senBuilder():
 						self.cache0 = self.cache0.replace(x[1], x[0])
 		self.finalOutput = self.cache0
 		print self.cache0
+
+

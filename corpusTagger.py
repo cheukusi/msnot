@@ -19,6 +19,7 @@ class corpusTagger:
 		from konlpy.tag import Komoran
 		Komoran = Komoran()
 		for x in self.rawSenList:
+			# ejlisedSen
 			a = Komoran.pos(x,False)
 			ejlisedSen = x.split()
 			pointer = 0
@@ -28,6 +29,7 @@ class corpusTagger:
 				pointer = pointer + len(a[i])
 			self.ejlisedSenList.append(ejlisedSen)
 			
+			# taggedSen
 			b = Komoran.pos(x)
 			self.taggedSenList.append(b)
 
