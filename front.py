@@ -22,7 +22,7 @@ import re, sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 #userInput = sys.argv[1]
-userInput = str('우리 서버는 신청마감시간에 임박하면 온라인접속이 폭주합니다.') 
+userInput = str('신청마감시간에 임박하면 온라인접속이 폭주합니다.') 
 #userInput = str('시험이 어려우면 자살율이 증가한다.')
 ###################################################################
 
